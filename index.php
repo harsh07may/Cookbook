@@ -22,6 +22,31 @@ if (isset($_GET['logout'])) {
   unset($_SESSION['username']);
   header("location: login.php");
 }
+$result;
+$conn = mysqli_connect('localhost', 'root', '', 'regis');
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+if (isset($_POST['veg'])) {
+  $sql = "SELECT rtitle,username,rCookTimeh,rCookTimem FROM recipe where rcategory='Vegetarian'";
+  $result = mysqli_query($conn, $sql);
+}
+if (isset($_POST['nonveg'])) {
+  $sql = "SELECT rtitle,username,rCookTimeh,rCookTimem FROM recipe where rcategory='Vegetarian'";
+  $result = mysqli_query($conn, $sql);
+}
+if (isset($_POST['drinks'])) {
+  $sql = "SELECT rtitle,username,rCookTimeh,rCookTimem FROM recipe where rcategory='Vegetarian'";
+  $result = mysqli_query($conn, $sql);
+}
+if (isset($_POST['showall'])) {
+  $sql = "SELECT rtitle,username,rCookTimeh,rCookTimem FROM recipe";
+  $result = mysqli_query($conn, $sql);
+}
+
+
+
+
 ?>
 
 <html lang="en">
@@ -53,6 +78,7 @@ if (isset($_GET['logout'])) {
       font-family: "Courier New";
     }
 
+
     .marketing .col-lg-4 {
       margin-bottom: 1.5rem;
       text-align: center;
@@ -82,12 +108,12 @@ if (isset($_GET['logout'])) {
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
           <li><a href="recipe.php" class="nav-link px-2 text-white">My Recipes</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">Bookmarks</a></li>
+
         </ul>
 
-        <form class="col-12 col-lg-3 mb-3 mb-lg-0 me-lg-3">
+        <!-- <form class="col-12 col-lg-3 mb-3 mb-lg-0 me-lg-3">
           <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
-        </form>
+        </form> -->
 
         <div class="text-end">
           <a class="" href="index.php?logout='1'"><button type="button" class="btn btn-outline-light me-2">Log out</button></a>
@@ -150,36 +176,49 @@ if (isset($_GET['logout'])) {
 
       <!-- categories -->
       <div class="container marketing">
+        <form action="index.php" method="post">
+          <!-- Three columns of text below the carousel -->
+          <div class="row">
+            <div class="col-lg-4">
+              <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <rect width="100%" height="100%" fill="#777" /><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text>
+              </svg>
 
-        <!-- Three columns of text below the carousel -->
-        <div class="row">
-          <div class="col-lg-4">
-            <img class="bi me-2" src="images/fruit-basket.svg" width="140" height="140">
-            <h2>Vegetarian</h2>
-            <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
-          </div><!-- /.col-lg-4 -->
-          <div class="col-lg-4">
-            <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
-              <title>Placeholder</title>
-              <rect width="100%" height="100%" fill="#777" /><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text>
-            </svg>
+              <h2>Vegetarian</h2>
+              <button class="btn btn-secondary" name="veg" type="submit">Show Recipes&raquo;</button>
+            </div><!-- /.col-lg-4 -->
+            <div class="col-lg-4">
+              <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <rect width="100%" height="100%" fill="#777" /><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text>
+              </svg>
 
-            <h2>Non Vegetarian</h2>
-            <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
-          </div><!-- /.col-lg-4 -->
-          <div class="col-lg-4">
-            <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
-              <title>Placeholder</title>
-              <rect width="100%" height="100%" fill="#777" /><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text>
-            </svg>
+              <h2>Non Vegetarian</h2>
+              <button class="btn btn-secondary" name="nonveg" type="submit">Show Recipes&raquo;</button>
+            </div><!-- /.col-lg-4 -->
+            <div class="col-lg-4">
+              <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <rect width="100%" height="100%" fill="#777" /><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text>
+              </svg>
 
-            <h2>Drinks</h2>
-            <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
-          </div><!-- /.col-lg-4 -->
-        </div><!-- /.row -->
+              <h2>Drinks</h2>
+              <button class="btn btn-secondary" name="drinks" type="submit">Show Recipes&raquo;</button>
+            </div>
+            <div class="col-lg-4">
+
+            </div>
+            <br>
+            <div class="col-lg-4">
 
 
+              <button class="btn btn-secondary" name="showall" type="submit">Show All</button>
+            </div>
+            <!-- /.col-lg-4 -->
+          </div><!-- /.row -->
 
+        </form>
       </div>
 
 
@@ -197,24 +236,116 @@ if (isset($_GET['logout'])) {
       <div class="container">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
           <!-- Cards start -->
-          <?php $i = 0;
-          while ($i < 15) { ?>
-            <div class="col"><a href="#" class="nav-link px-2 text-black">
-                <div class="card shadow-sm">
-                  <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Tumbnailh</text></svg> -->
-                  <img src="images/fruit-basket.svg" class="bd-placeholder-img card-img-top" alt="..." width="100%" height="225" focusable="false">
-                  <div class="card-body">
-                    <p class="fw-bold fs-5"><a href="#" class="nav-link px-2 text-black">Title</p>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <small class="text-muted">9 mins</small>
+          <?php
+          if (isset($_POST['veg'])) {
+            $sql = "SELECT rtitle,username,rCookTimeh,rCookTimem FROM recipe where rcategory='Vegetarian'";
+            $result = mysqli_query($conn, $sql);
+            if (mysqli_num_rows($result) > 0) {
+              while ($row = mysqli_fetch_assoc($result)) { ?>
+                <div class="col">
+                  <div class="card shadow-sm">
+                    <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Tumbnailh</text></svg> -->
+                    <img src="images/fruit-basket.svg" class="bd-placeholder-img card-img-top" alt="..." width="100%" height="225" focusable="false">
+                    <div class="card-body">
+                      <p class="fw-bold fs-5"><a href="#" class="nav-link nav-link px-2 text-black"><?php echo $row["rtitle"] ?></a></p>
+                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                          <small class="text-muted"><?php echo $row["username"] ?></small>
+                        </div>
+                        <small class="text-muted"><?php echo $row["rCookTimeh"] . "h " . $row["rCookTimem"] . "m " ?></small>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </a>
-            </div>
-            <!-- card end -->
-          <?php $i++;
+                <!-- card end -->
+          <?php
+              }
+            }
+          } ?>
+
+          <?php
+          if (isset($_POST['nonveg'])) {
+            $sql = "SELECT rtitle,username,rCookTimeh,rCookTimem FROM recipe where rcategory='Non Vegetarian'";
+            $result = mysqli_query($conn, $sql);
+            if (mysqli_num_rows($result) > 0) {
+              while ($row = mysqli_fetch_assoc($result)) { ?>
+                <div class="col">
+                  <div class="card shadow-sm">
+                    <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Tumbnailh</text></svg> -->
+                    <img src="images/fruit-basket.svg" class="bd-placeholder-img card-img-top" alt="..." width="100%" height="225" focusable="false">
+                    <div class="card-body">
+                      <p class="fw-bold fs-5"><a href="#" class="nav-link nav-link px-2 text-black"><?php echo $row["rtitle"] ?></a></p>
+                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                          <small class="text-muted"><?php echo $row["username"] ?></small>
+                        </div>
+                        <small class="text-muted"><?php echo $row["rCookTimeh"] . "h " . $row["rCookTimem"] . "m " ?></small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- card end -->
+          <?php
+              }
+            }
+          } ?>
+
+          <?php
+          if (isset($_POST['drinks'])) {
+            $sql = "SELECT rtitle,username,rCookTimeh,rCookTimem FROM recipe where rcategory='Beverages'";
+            $result = mysqli_query($conn, $sql);
+            if (mysqli_num_rows($result) > 0) {
+              while ($row = mysqli_fetch_assoc($result)) { ?>
+                <div class="col">
+                  <div class="card shadow-sm">
+                    <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Tumbnailh</text></svg> -->
+                    <img src="images/fruit-basket.svg" class="bd-placeholder-img card-img-top" alt="..." width="100%" height="225" focusable="false">
+                    <div class="card-body">
+                      <p class="fw-bold fs-5"><a href="#" class="nav-link nav-link px-2 text-black"><?php echo $row["rtitle"] ?></a></p>
+                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                          <small class="text-muted"><?php echo $row["username"] ?></small>
+                        </div>
+                        <small class="text-muted"><?php echo $row["rCookTimeh"] . "h " . $row["rCookTimem"] . "m " ?></small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- card end -->
+          <?php
+              }
+            }
+          } ?>
+
+          <?php
+          if (isset($_POST['showall'])) {
+            $sql = "SELECT rtitle,username,rCookTimeh,rCookTimem FROM recipe";
+            $result = mysqli_query($conn, $sql);
+            if (mysqli_num_rows($result) > 0) {
+              while ($row = mysqli_fetch_assoc($result)) { ?>
+                <div class="col">
+                  <div class="card shadow-sm">
+                    <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Tumbnailh</text></svg> -->
+                    <img src="images/fruit-basket.svg" class="bd-placeholder-img card-img-top" alt="..." width="100%" height="225" focusable="false">
+                    <div class="card-body">
+                      <p class="fw-bold fs-5"><a href="#" class="nav-link nav-link px-2 text-black"><?php echo $row["rtitle"] ?></a></p>
+                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                          <small class="text-muted"><?php echo $row["username"] ?></small>
+                        </div>
+                        <small class="text-muted"><?php echo $row["rCookTimeh"] . "h " . $row["rCookTimem"] . "m " ?></small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- card end -->
+          <?php
+              }
+            }
           } ?>
           <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
