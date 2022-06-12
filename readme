@@ -1,6 +1,6 @@
-create database called regis
+Create database called regis
 
-run the following query under SQL in your db
+Run the following query under SQL in your db
 
 CREATE TABLE `users` (
     `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -9,8 +9,8 @@ CREATE TABLE `users` (
     `password` varchar(100) NOT NULL
 )
 
-copy the folder and paste it in C:\xampp\htdocs\folder_name
+Copy the folder and paste it in C:\xampp\htdocs\folder_name
 
-start xamp and turn on apache and mysql server
+Start xamp and turn on apache and mysql server
 
-go to browser and redireect to localhost/folder_name
+Go to browser and redireect to localhost/folder_name
